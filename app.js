@@ -9,7 +9,6 @@ var log = require('models/log')(module);
 var db = require('models/db');
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var chat = require('models/chat');
 var app = express().http().io();
 var config = require('./config/index');
 var passport = require('models/facebook');
