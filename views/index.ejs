@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+   <!-- <script src="/socket.io/socket.io.js"></script>-->
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script>io = io.connect();</script>
+    <script src="/javascripts/chat.js"></script>
+
+  </head>
+  <body>
+    <h1>Welcome to <%= title %></h1>
+    <div id="horisontal-el-dashboard">
+      Block with dashbords
+    </div>
+
+    <div id="horisontal-el-chat">
+      <% include chat %>
+    </div>
+  </body>
+</html>
