@@ -3,18 +3,25 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-   <!-- <script src="/socket.io/socket.io.js"></script>-->
+    <!-- <script src="/socket.io/socket.io.js"></script>-->
     <script src="http://localhost:3000/socket.io/socket.io.js"></script>
     <script>io = io.connect();</script>
     <script src="/javascripts/chat.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script>
+      $(function() {
+          $( ".ui-widget-content" ).draggable();
+      });
+    </script>
 
   </head>
   <body>
-    <h1>Welcome to <%= title %></h1>
-    <div id="horisontal-el-dashboard">
-      Block with dashbords
-    </div>
 
+    <h1>Welcome to <%= title %></h1>
+    <% include dashboards%>
     <div id="horisontal-el-chat">
       <% include chat %>
     </div>

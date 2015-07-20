@@ -2,31 +2,35 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-
+#draggable {
+  width: 150px;
+  height: 150px;
+  padding: 0.5em;
+}
 a {
   color: #00B7FF;
 }
 #horisontal-el-dashboard {
-  width: 70%;
   float:left;
   margin-left:15px;
   text-align:center;
-  border: solid #0000FF;
 }
 #horisontal-el-chat {
-  float:left;
+  float:right;
+  width: 320px;
   margin-left:15px;
   text-align:center;
   padding: 5px;
   border: solid #0000FF;
 }
 #log {
+  text-align: left;
+  overflow: auto;
   height: 290px;
   border: 1px solid rgb(192, 192, 192);
   padding: 5px;
   margin-bottom: 5px;
   font: 11pt 'Palatino Linotype';
-  overflow: auto;
 }
 #input {
    width: 70%;

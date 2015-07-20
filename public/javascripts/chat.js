@@ -4,7 +4,6 @@
 window.onload = function() {
     io.on('connect', function () {
         io.on('newMessage', function (msg) {
-            debugger;
             document.querySelector('#log').innerHTML += new Date().timeNow() + ' <span class="username">' + msg.name + '</span>' + ': ' + msg.text + '<br>';
             document.querySelector('#log').scrollTop = document.querySelector('#log').scrollHeight;
         });
@@ -31,6 +30,8 @@ window.onload = function() {
         };
     });
     Date.prototype.timeNow = function () {
-        return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
+        return ((this.getHours() < 10)?"0":"") + this.getHours() + ":"
+            + ((this.getMinutes() < 10)?"0":"") + this.getMinutes() + ":"
+            + ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
     }
 };
