@@ -87,7 +87,8 @@ build/Release
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules
-
+config/
+node-js-getting-started/
 
 ### JetBrains template
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
@@ -146,5 +147,6 @@ crashlytics-build.properties
 
 # Linux trash folder which might appear on any partition or disk
 .Trash-*
+
 
 
