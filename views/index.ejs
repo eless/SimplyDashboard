@@ -4,7 +4,11 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <!-- <script src="/socket.io/socket.io.js"></script>-->
-    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <% if (process.env.NODE_ENV == 'development') { %>
+      <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <% } else { %>
+      <script src="https://simpledashboards.herokuapp.com/socket.io/socket.io.js"></script>
+    <% } %>
     <script>io = io.connect();</script>
     <script src="/javascripts/chat.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
