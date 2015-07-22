@@ -24,6 +24,24 @@
     </script>
     <script>
       $(function() {
+        $('#tabs').tabs();
+        $('button').button().click(function(e) {
+          var tabsElem = $('#tabs');
+          if (this.id == "addDashboard") {
+            // Добавляем вкладку
+            $( "<li><a href='#tabs-1'>" + document.querySelector('#dashName').value +"</a></li>" )
+                    .appendTo( "#tabs .ui-tabs-nav" );
+            tabsElem.tabs("refresh");
+          } else {
+            var tabIndex = tabsElem.tabs("option", "active");
+            tabsElem.find('li:eq(' + tabIndex + ')').css('display','none');
+            tabsElem.tabs("refresh");
+          }
+        })
+      });
+    </script>
+    <script>
+      $(function() {
         $( "#tabs" ).tabs();
       });
     </script>
