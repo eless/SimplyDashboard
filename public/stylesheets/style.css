@@ -12,6 +12,7 @@ a {
 }
 #horisontal-el-dashboard {
   float:left;
+  width: 75%;
   margin-left:15px;
   text-align:center;
 }

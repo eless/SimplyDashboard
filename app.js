@@ -14,6 +14,7 @@ var config = require('./config/index');
 var passport = require('models/facebook');
 var facebook = require('./routes/facebook')
     ,logout = require('./routes/logout')
+    ,dashboards = require('./routes/dashboards')
 ;
 app.use(passport.initialize());
 app.use(passport.session());
@@ -40,6 +41,8 @@ var index = require('./routes/index')
     ;
 
 app.get('/', index.router);
+app.get('dashboards/dashboards.json', dashboards.sendDashboards);
+app.get('dashboards/:id', dashboards.sendWidgets);
 
 // event handlers
 app.io.route('sendNewMessage',

@@ -6,8 +6,9 @@ var db = require('models/db');
 var dashboards = require('model/dashboards');
 
 
-exports.router = function(req, res){
-    res.send('dashboards', {
-        dashboards: dashboards
-    });
+exports.sendDashboards = function(req, res){
+    res.send(dashboards.getList());
+};
+exports.sendWidgets = function(req, res){
+    res.send(dashboards.getWidgets(req.params.id));
 };
