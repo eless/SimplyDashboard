@@ -3,7 +3,7 @@
  */
 var log = require('models/log')(module);
 var db = require('models/db');
-var dashboards = require('model/dashboards');
+var dashboards = require('models/dashboards');
 
 
 exports.sendDashboards = function(req, res){
