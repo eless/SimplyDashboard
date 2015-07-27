@@ -18,7 +18,10 @@ var connection = mysql.createConnection(process.env.NODE_ENV == 'development' ? 
 mysqlUtilities.upgrade(connection);
 // Mix-in for Introspection Methods
 mysqlUtilities.introspection(connection);
-
+var dashboards = [
+    {name: 'first from db', id: '1'},
+    {name: 'second from db', id: '2'}
+];
 var dashboard = {
     add: function(name){
 
@@ -27,7 +30,7 @@ var dashboard = {
 
     },
     getList: function(){
-        return [];
+        return dashboards;
     }
 };
 var widget = {

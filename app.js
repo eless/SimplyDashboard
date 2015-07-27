@@ -41,7 +41,7 @@ var index = require('./routes/index')
     ;
 
 app.get('/', index.router);
-app.get('dashboards/dashboards.json', dashboards.sendDashboards);
+app.get('/dashboards/dashboards.json', dashboards.sendDashboards);
 app.get('dashboards/:id', dashboards.sendWidgets);
 
 // event handlers
