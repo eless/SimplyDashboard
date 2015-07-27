@@ -14,7 +14,7 @@ dashCollection.directive('ngTabs', function() {
         setTimeout(function() {
             $('#tabs').tabs();
             $( ".ui-widget-content" ).draggable();
-        },100);
+        },200);
     };
 });/*
 function dashboardsCtrl($scope, $http) {
