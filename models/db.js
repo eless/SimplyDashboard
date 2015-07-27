@@ -22,6 +22,10 @@ var dashboards = [
     {name: 'first from db', id: '1'},
     {name: 'second from db', id: '2'}
 ];
+var widgets = [
+    {id: 'v1', name: 'widget1', controlType: 'text', value: 'test message from server- widget1'},
+    {id: 'v2', name: 'widget2', controlType: 'text', value: 'test message from server- putin huilo'}
+];
 var dashboard = {
     add: function(name){
 
@@ -41,7 +45,7 @@ var widget = {
 
     },
     getList: function(dashboardId){
-        return [];
+        return widgets;
     }
 };
 module.exports.dashboard = dashboard;

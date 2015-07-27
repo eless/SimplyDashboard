@@ -49,7 +49,7 @@ app.io.route('sendNewMessage',
     function(req) {
         app.io.broadcast('newMessage', { name: req.data[0], text: req.data[1]})
     }
-);//events
+);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

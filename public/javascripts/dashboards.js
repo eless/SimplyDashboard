@@ -13,7 +13,8 @@ dashCollection.directive('ngTabs', function() {
     return function(scope, elm) {
         setTimeout(function() {
             $('#tabs').tabs();
-        },0);
+            $( ".ui-widget-content" ).draggable();
+        },100);
     };
 });/*
 function dashboardsCtrl($scope, $http) {
