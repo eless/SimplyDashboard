@@ -15,9 +15,13 @@
             <div id="{{dash.id}}" ng-repeat="dash in dashboards">
                 <input type="text" id="widgetName" autofocus><input type="submit" id="addWidget" value="Add sticker">
                 <p>{{dash.name}}</p>
-                <div id="draggable" class="ui-widget-content">
-                    <p>Draggable widget1</p>
+                <div id="draggable" class="ui-widget-content" ng-repeat="widget in dash.widgets">
+                    <p>{{widget.name}}</p>
+                    <p>{{widget.id}}</p>
+                    <p>{{widget.value}}</p>
                 </div>
+
+
             </div>
     </div>
 </div>
