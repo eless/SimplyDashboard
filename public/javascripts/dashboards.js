@@ -24,22 +24,25 @@ function dashboardsCtrl($scope, $http) {
         }
     })
 }*/
-window.onload = function() {
+function dashboardsEvents() {
     io.on('connect', function () {
         io.on('newDashboard', function (msg) {
             var tabsElem = $('#tabs');
             /*var name = document.querySelector('#dashName').value;
             // Добавляем вкладку
             $( "<li><a href='#" + msg.id + "'>" + name +"</a></li>" )
-                .appendTo( "#tabs .ui-tabs-nav" );*/
+                .appendTo( "#tabs .ui-tabs-nav" );
+*/
             tabsElem.tabs("refresh");
         });
         io.on('newWidget', function (msg) {
             var tabsElem = $('#tabs');
-            /*var name = document.querySelector('#dashName').value;
+
+            var name = document.querySelector('#dashName').value;
             // Добавляем вкладку
             $( "<li><a href='#" + msg.id + "'>" + name +"</a></li>" )
-                .appendTo( "#tabs .ui-tabs-nav" );*/
+                .appendTo( "#tabs .ui-tabs-nav" );
+
             tabsElem.tabs("refresh");
         });
         document.querySelector('#addDashboard').onclick = function () {
@@ -64,4 +67,4 @@ window.onload = function() {
             tabsElem.tabs("refresh");
         };
     })
-};
+}

@@ -1,7 +1,7 @@
 /**
  * Created by Eless on 20.07.2015.
  */
-window.onload = function() {
+ function chatEvents() {
     io.on('connect', function () {
         io.on('newMessage', function (msg) {
             document.querySelector('#log').innerHTML += new Date().timeNow() + ' <span class="username">' + msg.name + '</span>' + ': ' + msg.text + '<br>';
@@ -15,7 +15,7 @@ window.onload = function() {
                     io.emit('sendNewMessage', [name, text]);
                     document.querySelector('#input').value = '';
                 } else {
-                    document.querySelector('#log').innerHTML += '<span class="username">Нужно ввести имя пользователя!</span><br>';
+                    document.querySelector('#log').innerHTML += '<span class="username">Enter your username</span><br>';
                 }
             }
         };
@@ -25,7 +25,7 @@ window.onload = function() {
                 io.emit('sendNewMessage', [name, document.querySelector('#input').value]);
                 document.querySelector('#input').value = '';
             } else {
-                document.querySelector('#log').innerHTML += '<span class="username">Нужно ввести имя пользователя!</span><br>';
+                document.querySelector('#log').innerHTML += '<span class="username">Enter your username</span><br>';
             }
         };
     });
@@ -34,4 +34,4 @@ window.onload = function() {
             + ((this.getMinutes() < 10)?"0":"") + this.getMinutes() + ":"
             + ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
     }
-};
+}

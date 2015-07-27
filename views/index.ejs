@@ -16,40 +16,18 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <!--<link rel="stylesheet" href="/resources/demos/style.css">-->
     <script>
-      /*$(function() {
-          $( ".ui-widget-content" ).draggable();
-      });*/
+      window.onload = function() {
+        chatEvents();
+        dashboardsEvents();
+      };
     </script>
-    <script>
-      $(function() {
-       /* setTimeout(function() {
-          $('#tabs').tabs();
-        },0);*/
-        //$('#tabs').tabs();
-        /*$('button').button().click(function(e) {
-          var tabsElem = $('#tabs');
-          if (this.id == "addDashboard") {
-            // Добавляем вкладку
-            $( "<li><a href='#tabs-1'>" + document.querySelector('#dashName').value +"</a></li>" )
-                    .appendTo( "#tabs .ui-tabs-nav" );
-            tabsElem.tabs("refresh");
-          }
-        })*/
-      });
-    </script>
-    <!--<script>
-      $(function() {
-        $( "#tabs" ).tabs();
-      });
-    </script>-->
   </head>
   <body>
 
     <h1>Welcome to <%= title %></h1>
     <% include dashboards%>
-    <div id="horisontal-el-chat">
+    <div id="horisontal-el-chat" class="ui-widget-content">
       <% include chat %>
     </div>
   </body>
