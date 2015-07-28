@@ -12,8 +12,12 @@ dashCollection.controller('dashboardsCtrl', ['$scope', '$http', function ($scope
 dashCollection.directive('ngTabs', function() {
     return function(scope, elm) {
         setTimeout(function() {
-            $('#tabs').tabs();
-            $( ".ui-widget-content" ).draggable();
+            $('#tabs').tabs().addClass( ".ui-tabs" );
+            $( ".ui-widget-content" ).draggable(
+                {
+                    containment: '#horisontal-el-dashboard'
+                }
+            );
         },200);
     };
 });/*

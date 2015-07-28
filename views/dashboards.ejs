@@ -6,7 +6,7 @@
         <button id="removeDash">remove current dashboard</button>
     </p><br>
 
-    <div id="tabs" ng-controller="dashboardsCtrl" ng-tabs="ngTabs">
+    <div id="tabs" class="ui-tabs-abs" ng-controller="dashboardsCtrl" ng-tabs="ngTabs">
         <ul>
             <li ng-repeat="dash in dashboards">
                 <a href="#{{dash.id}}">{{dash.name}}</a>
@@ -15,10 +15,10 @@
             <div id="{{dash.id}}" ng-repeat="dash in dashboards">
                 <input type="text" id="widgetName" autofocus><input type="submit" id="addWidget" value="Add sticker">
                 <p>{{dash.name}}</p>
-                <div id="draggable" class="ui-widget-content" ng-repeat="widget in dash.widgets">
-                    <p>{{widget.name}}</p>
-                    <p>{{widget.id}}</p>
-                    <p>{{widget.value}}</p>
+                <div id="draggable" class="ui-widget-content widget-form" ng-repeat="widget in dash.widgets">
+                    <h1>{{widget.name}}</h1>
+                    <p>Id: {{widget.id}}</p>
+                    <p>Value: {{widget.value}}</p>
                 </div>
 
 
