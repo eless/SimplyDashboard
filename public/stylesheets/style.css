@@ -2,11 +2,12 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-#draggable {
+.draggable {
   width: 220px;
   height: 300px;
   padding: 0.5em;
   border: solid #ff8f2b;
+  background: #A0A000;
   overflow: auto;
   float:left;
 }
@@ -15,7 +16,7 @@ a {
 }
 #horisontal-el-dashboard {
   float:left;
-  width: 75%;
+  width: 70%;
   height: 800px;
   margin-left:15px;
   text-align:center;
@@ -23,13 +24,13 @@ a {
 }
 .ui-tabs {
   height: inherit;
-  width: 100%;
+  width: 95%;
   padding: .2em;
   position: fixed;
 }
 #horisontal-el-chat {
   float:right;
-  width: 320px;
+  width: 20%;
   margin-left:15px;
   text-align:center;
   padding: 5px;
@@ -61,5 +62,7 @@ a {
   background: blueviolet;
 }
 
-.widget-form {
+.close-widget-button {
+  float: right;
+  cursor:pointer;
 }

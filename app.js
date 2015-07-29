@@ -15,6 +15,7 @@ var passport = require('models/facebook');
 var facebook = require('./routes/facebook')
     ,logout = require('./routes/logout')
     ,dashboards = require('./routes/dashboards')
+    ,dashboardsModel = require('models/dashboards')
 ;
 app.use(passport.initialize());
 app.use(passport.session());
@@ -50,6 +51,18 @@ app.io.route('sendNewMessage',
         app.io.broadcast('newMessage', { name: req.data[0], text: req.data[1]})
     }
 );
+app.io.route('removeWidget',function(req){
+    dashboardsModel.removeWidget(req.data)
+} );
+app.io.route('removeDashboard',function(req){
+    dashboardsModel.remove(req.data)
+} );
+app.io.route('addNewDashboard',function(req){
+    dashboardsModel.addDashboard(req.data)
+} );
+app.io.route('addNewWidget',function(req){
+    dashboardsModel.addWidget(req.data[0], req.data[1])
+} );
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
