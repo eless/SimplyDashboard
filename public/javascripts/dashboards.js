@@ -16,6 +16,30 @@ dashCollection.directive('ngTabs', function() {
             $( ".draggable" ).draggable({
                     containment: '#tabs'
             });
+            $( "#add-widget-buttons" ).buttonset();
+
+            $('#add-new-text').dialog({
+                autoOpen: false,
+                modal: true
+            });
+            $('#addTextWidget').click(function(e) {
+                $('#add-new-text').dialog("open")
+            });
+            $('#add-new-link').dialog({
+                autoOpen: false,
+                modal: true
+            });
+            $('#addLinkWidget').click(function(e) {
+                $('#add-new-link').dialog("open")
+            });
+            $('#add-new-img').dialog({
+                autoOpen: false,
+                modal: true
+            });
+
+            $('#addImgWidget').click(function(e) {
+                $('#add-new-img').dialog("open")
+            });
         },300);
     };
 });

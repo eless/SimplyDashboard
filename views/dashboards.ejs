@@ -5,7 +5,15 @@
     <p>
         <button id="removeDash">remove current dashboard</button>
     </p><br>
-
+    <div id="add-new-text" title="Add text">
+        Содержимое, которое будет отображаться в диалоговом окне. К этому <b>содержимому</b> могут применяться <em>стили</em>.
+    </div>
+    <div id="add-new-link" title="Add link">
+        Содержимое, которое будет отображаться в диалоговом окне. К этому <b>содержимому</b> могут применяться <em>стили</em>.
+    </div>
+    <div id="add-new-img" title="Add image">
+        Содержимое, которое будет отображаться в диалоговом окне. К этому <b>содержимому</b> могут применяться <em>стили</em>.
+    </div>
     <div id="tabs" class="ui-tabs-abs" ng-controller="dashboardsCtrl" ng-tabs="ngTabs">
         <ul>
             <li ng-repeat="dash in dashboards">
@@ -13,8 +21,13 @@
             </li>
         </ul>
             <div id="{{dash.id}}" ng-repeat="dash in dashboards">
-                <input type="text" id="widgetName" autofocus><input type="submit" id="addWidget" value="Add sticker">
-                <p>{{dash.name}}</p>
+                <input type="text" id="widgetName" autofocus>
+                <div id="add-widget-buttons">
+                    <input type="submit" id="addTextWidget" value="Add text">
+                    <input type="submit" id="addLinkWidget" value="Add link">
+                    <input type="submit" id="addImgWidget" value="Add image">
+                </div>
+
                 <div id='{{widget.id}}' class="draggable" ng-repeat="widget in dash.widgets">
                         <img src="images/delete-widget.png" class="close-widget-button" onclick="closeWidget(this.parentNode.id)"/>
                         <p>Id: {{widget.id}}</p>
