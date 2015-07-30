@@ -7,13 +7,14 @@
     </p><br>
 
     <div id="add-new-text" class="add-widget-dialog" title="Add text">
-        Содержимое, которое будет отображаться в диалоговом окне. К этому <b>содержимому</b> могут применяться <em>стили</em>.
+        <textarea class="markItUp" id="new-text-widget"></textarea>
     </div>
     <div id="add-new-link" class="add-widget-dialog" title="Add link">
-        Содержимое, которое будет отображаться в диалоговом окне. К этому <b>содержимому</b> могут применяться <em>стили</em>.
+        <textarea class="markItUp" id="new-link-name-widget" placeholder="Add linked-text here"></textarea>
+        <textarea id="new-link-address-widget" placeholder="Add link here" cols="70"></textarea>
     </div>
     <div id="add-new-img" class="add-widget-dialog" title="Add image">
-        Содержимое, которое будет отображаться в диалоговом окне. К этому <b>содержимому</b> могут применяться <em>стили</em>.
+        <input type="file" name="image" />
     </div>
     <div id="tabs" class="ui-tabs-abs" ng-controller="dashboardsCtrl" ng-tabs="ngTabs">
         <ul>

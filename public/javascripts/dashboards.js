@@ -15,13 +15,12 @@ dashCollection.directive('ngTabs', function() {
             $('#tabs').addClass( ".ui-tabs" ).tabs();
             $( ".draggable" ).draggable({
                     containment: '#tabs'
-            }).resizable({
-            });
+            }).resizable();
             $( ".new-widget-buttons" ).buttonset();
 
 
             $('.addTextWidget').click(function(e) {
-                $('#add-new-text').dialog("open")
+                $('#add-new-text').addClass(".markup-square").dialog("open")
             });
 
             $('.addLinkWidget').click(function(e) {
@@ -45,6 +44,8 @@ function dashboardsEvents() {
         buttons: [{text: "OK", click: function() {
             $('#add-new-text').dialog("close");
         }}],
+        width: 740,
+        height: 520,
         autoOpen: false,
         modal: true
     });
@@ -52,6 +53,8 @@ function dashboardsEvents() {
         buttons: [{text: "OK", click: function() {
             $('#add-new-link').dialog("close");
         }}],
+        width: 750,
+        height: 570,
         autoOpen: false,
         modal: true
     });
@@ -59,6 +62,8 @@ function dashboardsEvents() {
         buttons: [{text: "OK", click: function() {
             $('#add-new-img').dialog("close");
         }}],
+        width: 400,
+        height: 170,
         autoOpen: false,
         modal: true
     });
@@ -102,5 +107,6 @@ function dashboardsEvents() {
             tabsElem.tabs("refresh");
         };
 
-    })
+    });
+    $(".markItUp").markItUp(mySettings);
 }

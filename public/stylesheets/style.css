@@ -11,6 +11,10 @@ body {
   overflow: hidden;
   float:left;
 }
+.markup-square{
+  width: 740px;
+  height: 520px;
+}
 a {
   color: #00B7FF;
 }
