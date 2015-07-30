@@ -15,31 +15,24 @@ dashCollection.directive('ngTabs', function() {
             $('#tabs').addClass( ".ui-tabs" ).tabs();
             $( ".draggable" ).draggable({
                     containment: '#tabs'
+            }).resizable({
             });
-            $( "#add-widget-buttons" ).buttonset();
+            $( ".new-widget-buttons" ).buttonset();
 
-            $('#add-new-text').dialog({
-                autoOpen: false,
-                modal: true
-            });
-            $('#addTextWidget').click(function(e) {
+
+            $('.addTextWidget').click(function(e) {
                 $('#add-new-text').dialog("open")
             });
-            $('#add-new-link').dialog({
-                autoOpen: false,
-                modal: true
-            });
-            $('#addLinkWidget').click(function(e) {
+
+            $('.addLinkWidget').click(function(e) {
                 $('#add-new-link').dialog("open")
             });
-            $('#add-new-img').dialog({
-                autoOpen: false,
-                modal: true
-            });
 
-            $('#addImgWidget').click(function(e) {
+
+            $('.addImgWidget').click(function(e) {
                 $('#add-new-img').dialog("open")
             });
+
         },300);
     };
 });
@@ -48,7 +41,27 @@ function closeWidget(id){
     io.emit('removeWidget', id);
 }
 function dashboardsEvents() {
-
+    $('#add-new-text').dialog({
+        buttons: [{text: "OK", click: function() {
+            $('#add-new-text').dialog("close");
+        }}],
+        autoOpen: false,
+        modal: true
+    });
+    $('#add-new-link').dialog({
+        buttons: [{text: "OK", click: function() {
+            $('#add-new-link').dialog("close");
+        }}],
+        autoOpen: false,
+        modal: true
+    });
+    $('#add-new-img').dialog({
+        buttons: [{text: "OK", click: function() {
+            $('#add-new-img').dialog("close");
+        }}],
+        autoOpen: false,
+        modal: true
+    });
     io.on('connect', function () {
         io.on('newDashboard', function (msg) {
             var tabsElem = $('#tabs');
@@ -88,5 +101,6 @@ function dashboardsEvents() {
             //elem.css('display','none');
             tabsElem.tabs("refresh");
         };
+
     })
 }

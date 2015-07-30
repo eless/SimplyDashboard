@@ -2,13 +2,13 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-.draggable {
-  width: 220px;
-  height: 300px;
+.draggable {/*
+  max-width: 220px;
+  max-height: 300px;*/
   padding: 0.5em;
   border: solid #ff8f2b;
   background: #A0A000;
-  overflow: auto;
+  overflow: hidden;
   float:left;
 }
 a {
