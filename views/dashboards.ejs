@@ -28,12 +28,12 @@
                     <input type="submit" class="addTextWidget" value="Add text">
                     <input type="submit" class="addLinkWidget" value="Add link">
                     <input type="submit" class="addImgWidget" value="Add image">
+                    <a>{{dash.id}}</a>
                 </div>
-
                 <div id='{{widget.id}}' class="draggable" ng-repeat="widget in dash.widgets">
-                        <img src="images/delete-widget.png" class="close-widget-button" onclick="closeWidget(this.parentNode.id)"/>
-                        <p>Id: {{widget.id}}</p>
-                        <p>Value: {{widget.value}}</p>
+                    <img src="images/delete-widget.png" class="close-widget-button" onclick="closeWidget(this.parentNode.id)"/>
+                    <p>Id: {{widget.id}}</p>
+                    <p>Value: {{widget.value}}</p>
                 </div>
             </div>
     </div>

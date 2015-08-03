@@ -19,13 +19,18 @@ mysqlUtilities.upgrade(connection);
 // Mix-in for Introspection Methods
 mysqlUtilities.introspection(connection);
 
-var widgets = [
-    {id: 'v1', name: 'widget1', controlType: 'text', value: 'test message from server- widget1'},
-    {id: 'v2', name: 'widget2', controlType: 'text', value: 'test message from server- putin huilo'}
+var widgets1 = [
+    {id: 'v1', name: 'widget1', text: 'test message from server- widget1'},
+    {id: 'v2', name: 'widget2', text: '<b>test message from server- putin huilo</b>'},
+    {id: 'v3', name: 'widget3', text: '<h1><span style="color: red; ">google</span></h1>', link: 'https://www.google.com'}
+];
+var widgets2 = [
+    {id: 'v21', name: 'widget1', image: 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAABySURBVDhP7Y7RDcAgCERdrls4EXt2DsoRMRhRU/rbj+flgLtYmPkT+hARR/hD8TXa9wLoCbkbSjCzhZoTcncJd6qghRGE6k8wt6WaFS2kYTerUDMicxBEYY8dicxLsAsDfXYFKywzmDf8BUFBhl6Qh8sDHpXcScsZN1EAAAAASUVORK5CYII='},
+    {id: 'v22', name: 'widget2', text: '<b>test message from server- widget2 putin huilo</b>'}
 ];
 var dashboards = [
-    {name: 'first from db', id: '1', widgets: widgets},
-    {name: 'second from db', id: '2'}
+    {name: 'first from db', id: 'dash1'},
+    {name: 'second from db', id: 'dash2'}
 ];
 var dashboard = {
     add: function(name){
@@ -46,7 +51,9 @@ var widget = {
 
     },
     getList: function(dashboardId){
-        return widgets;
+        if(dashboardId === "dash1")
+            return widgets1;
+        else return widgets2
     }
 };
 module.exports.dashboard = dashboard;

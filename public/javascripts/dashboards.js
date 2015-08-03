@@ -2,25 +2,66 @@
  * Created by Eless on 21.07.2015.
  */
 var dashCollection = angular.module('dashCollection', []);
-dashCollection.controller('dashboardsCtrl', ['$scope', '$http', function ($scope, $http) {
+var dashboardsCtrl = dashCollection.controller('dashboardsCtrl', ['$scope', '$http', function ($scope, $http) {
     $http.get('dashboards/dashboards.json').success(function (data) {
         if (data) {
             $scope.dashboards = data;
         }
-    })
+    });
+
 }]);
+closeWidget = function(id){
+    $("#"+id).hide(200);
+    io.emit('removeWidget', id);
+};
 dashCollection.directive('ngTabs', function() {
+    function addWidgets(tabId, widgets){
+        $( "#tabs" ).tabs( "load", "#"+ tabId);
+        var widgetsHtml = "";
+        for(var i=0;i<widgets.length;i++){
+            $("#" + widgets[i].id).remove();
+            widgetsHtml +=
+                "<div class='draggable' id='"+ widgets[i].id +"'>" +
+                "<h1>"+ widgets[i].name +"<img src='images/delete-widget.png' class='close-widget-button' onclick='closeWidget(\"" + widgets[i].id + "\")'/></h1>";
+            if(widgets[i].text && widgets[i].text != ''){
+                if(widgets[i].link && widgets[i].link != '')
+                    widgetsHtml += "<p><a href='"+ widgets[i].link +"'>" + widgets[i].text + "</a></p>";
+                else
+                    widgetsHtml += "<p>" + widgets[i].text + "</p>";
+            }
+            if(widgets[i].image){
+                widgetsHtml += "<img src='data:image/png;base64," + widgets[i].image + "'/>"
+            }
+            widgetsHtml += "</div>";
+        }
+        $(widgetsHtml).appendTo( "#" + tabId );
+        $( ".draggable").draggable({
+            containment: '#tabs'
+        }).resizable();
+    }
     return function(scope, elm) {
         setTimeout(function() {
-            $('#tabs').addClass( ".ui-tabs" ).tabs();
-            $( ".draggable" ).draggable({
-                    containment: '#tabs'
-            }).resizable();
+            $('#tabs').addClass( ".ui-tabs" ).tabs({
+                spinner: 'Loading...',
+                create: function( event, ui ) {
+                    var tabId = ui.panel.attr("id");
+                    $.get('dashboards/' + tabId, function(data) {
+                        addWidgets(tabId, data);
+                    })
+                },
+                activate: function(event, ui) {
+                    var oldTabId = ui.oldPanel.attr("id");
+
+                    var tabId = ui.newPanel.attr("id");
+                    $.get('dashboards/' + tabId, function(data){
+                        addWidgets(tabId, data);
+                    });
+                }
+            });
             $( ".new-widget-buttons" ).buttonset();
 
-
             $('.addTextWidget').click(function(e) {
-                $('#add-new-text').addClass(".markup-square").dialog("open")
+                $('#add-new-text').dialog("open")
             });
 
             $('.addLinkWidget').click(function(e) {
@@ -31,17 +72,14 @@ dashCollection.directive('ngTabs', function() {
             $('.addImgWidget').click(function(e) {
                 $('#add-new-img').dialog("open")
             });
-
         },300);
     };
 });
-function closeWidget(id){
-    $("#"+id).hide(200);
-    io.emit('removeWidget', id);
-}
+
 function dashboardsEvents() {
     $('#add-new-text').dialog({
         buttons: [{text: "OK", click: function() {
+
             $('#add-new-text').dialog("close");
         }}],
         width: 740,
@@ -51,6 +89,7 @@ function dashboardsEvents() {
     });
     $('#add-new-link').dialog({
         buttons: [{text: "OK", click: function() {
+
             $('#add-new-link').dialog("close");
         }}],
         width: 750,
@@ -60,6 +99,7 @@ function dashboardsEvents() {
     });
     $('#add-new-img').dialog({
         buttons: [{text: "OK", click: function() {
+
             $('#add-new-img').dialog("close");
         }}],
         width: 400,
@@ -88,15 +128,15 @@ function dashboardsEvents() {
                 io.emit('addNewDashboard', dashName);
             }
         };
-        document.querySelector('#addWidget').onclick = function () {
-            var tabsElem = $('#tabs');
-            var tabIndex = tabsElem.tabs("option", "active");
-            var dash = tabsElem.find('li:eq(' + tabIndex + ')');
-            var widget = {};
-            if (widget) {
-                io.emit('addNewWidget', [dash.id, widget]);
-            }
-        };
+        /*document.querySelector('#addWidget').onclick = function () {
+         var tabsElem = $('#tabs');
+         var tabIndex = tabsElem.tabs("option", "active");
+         var dash = tabsElem.find('li:eq(' + tabIndex + ')');
+         var widget = {};
+         if (widget) {
+         io.emit('addNewWidget', [dash.id, widget]);
+         }
+         };*/
         document.querySelector('#removeDash').onclick = function () {
             var tabsElem = $('#tabs');
             var tabIndex = tabsElem.tabs("option", "active");

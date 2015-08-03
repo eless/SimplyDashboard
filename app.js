@@ -43,7 +43,7 @@ var index = require('./routes/index')
 
 app.get('/', index.router);
 app.get('/dashboards/dashboards.json', dashboards.sendDashboards);
-app.get('dashboards/:id', dashboards.sendWidgets);
+app.get('/dashboards/:id', dashboards.sendWidgets);
 
 // event handlers
 app.io.route('sendNewMessage',

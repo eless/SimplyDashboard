@@ -9,12 +9,11 @@ body {
   border: solid #ff8f2b;
   background: #A0A000;
   overflow: hidden;
+  position:fixed !important;
+}
+/*.widget-header{
   float:left;
-}
-.markup-square{
-  width: 740px;
-  height: 520px;
-}
+}*/
 a {
   color: #00B7FF;
 }
@@ -26,6 +25,7 @@ a {
   text-align:center;
   position: absolute;
 }
+
 .ui-tabs {
   height: inherit;
   width: 95%;
