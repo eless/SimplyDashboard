@@ -33,27 +33,49 @@ var dashboards = [
     {name: 'second from db', id: 'dash2'}
 ];
 var dashboard = {
-    add: function(name){
-
+    add: function(name, callback){
+        connection.query("INSERT INTO `dashboard` (`name`) VALUES (?)", name,
+            function(error, results){
+                if(error) throw error;
+                callback.call(this, results);
+            });
     },
-    remove: function(id){
-
+    remove: function(id, callback, scope){
+        var scope = scope || this;
+        connection.delete('dashboard', { Id: id }, function(err, affectedRows) {
+            if(err) throw err;
+            if(callback){
+                callback.call(scope, affectedRows);
+            }
+        });
     },
-    getList: function(){
-        return dashboards;
+    getList: function(callback, scope){
+        var scope = scope || this;
+        var query = 'SELECT * FROM dashboard';
+        connection.query(query, function(error, result){
+            if(error) throw error;
+            if(callback) {
+                callback.call(scope, result);
+            }
+            else return result;
+        });
     }
 };
 var widget = {
-    add: function(dashboardId, widget){
-
+    add: function(widget){
+        connection.query("INSERT INTO `widget` (`dashboardId`, `name`, `text`, `link`, `image`) VALUES ?", [[widget.data]],
+            function(error, results){
+                if(error) throw error;
+            });
     },
     remove: function(id){
 
     },
-    getList: function(dashboardId){
-        if(dashboardId === "dash1")
-            return widgets1;
-        else return widgets2
+    getList: function(dashboardId, callback){
+        connection.select('widget', '*', { dashboardId: dashboardId }, function(error, results){
+            if(error) throw error;
+            callback.call(this, results);
+        });
     }
 };
 module.exports.dashboard = dashboard;

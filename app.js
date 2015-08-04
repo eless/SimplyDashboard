@@ -44,7 +44,9 @@ var index = require('./routes/index')
 app.get('/', index.router);
 app.get('/dashboards/dashboards.json', dashboards.sendDashboards);
 app.get('/dashboards/:id', dashboards.sendWidgets);
-
+app.post('/upload', function(req, res){
+    res.send({status: 'ok', text: 'Success'});
+});
 // event handlers
 app.io.route('sendNewMessage',
     function(req) {
@@ -58,12 +60,13 @@ app.io.route('removeDashboard',function(req){
     dashboardsModel.remove(req.data)
 } );
 app.io.route('addNewDashboard',function(req){
-    dashboardsModel.addDashboard(req.data)
+    dashboardsModel.addDashboard(req.data, function(result){
+        app.io.emit('newDashboard');
+    })
 } );
 app.io.route('addNewWidget',function(req){
     dashboardsModel.addWidget(req.data[0], req.data[1])
 } );
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

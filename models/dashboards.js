@@ -9,20 +9,25 @@ var widget = require('models/db').widget;
 
 
 var dashboards = {
-    getList: function(){
-        return dashboard.getList();
+    getList: function(callback, scope){
+        var scope = scope || this;
+        dashboard.getList(callback, scope);
     },
     getWidgets: function(dashboardId){
-        return widget.getList(dashboardId);
+        widget.getList(dashboardId, function(result){
+            return result;
+        });
     },
     addWidget: function(dashboardId, widget){
         widget.add(dashboardId, widget);
     },
-    addDashboard: function(name){
-        dashboard.add(name);
+    addDashboard: function(name, callback){
+        dashboard.add(name, callback);
     },
     remove: function(id){
-        dashboard.remove(id);
+        if(id){
+            dashboard.remove(id);
+        }
     },
     removeWidget: function(id){
         widget.remove(id);

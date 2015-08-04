@@ -7,7 +7,7 @@ var dashboards = require('models/dashboards');
 
 
 exports.sendDashboards = function(req, res){
-    res.send(dashboards.getList());
+    dashboards.getList(res.send, res);
 };
 exports.sendWidgets = function(req, res){
     res.send(dashboards.getWidgets(req.params.id));

@@ -45,17 +45,19 @@ dashCollection.directive('ngTabs', function() {
                 spinner: 'Loading...',
                 create: function( event, ui ) {
                     var tabId = ui.panel.attr("id");
-                    $.get('dashboards/' + tabId, function(data) {
-                        addWidgets(tabId, data);
-                    })
+                    if(tabId) {
+                        $.get('dashboards/' + tabId, function(data) {
+                            addWidgets(tabId, data);
+                        })
+                    }
                 },
                 activate: function(event, ui) {
-                    var oldTabId = ui.oldPanel.attr("id");
-
                     var tabId = ui.newPanel.attr("id");
-                    $.get('dashboards/' + tabId, function(data){
-                        addWidgets(tabId, data);
-                    });
+                    if(tabId) {
+                        $.get('dashboards/' + tabId, function(data) {
+                            addWidgets(tabId, data);
+                        })
+                    }
                 }
             });
             $( ".new-widget-buttons" ).buttonset();
@@ -70,12 +72,48 @@ dashCollection.directive('ngTabs', function() {
 
 
             $('.addImgWidget').click(function(e) {
-                $('#add-new-img').dialog("open")
+                $('#add-new-img').dialog("open");
+                document.forms.upload.onsubmit = function() {
+                    var input = this.elements.image;
+                    var file = input.files[0];
+                    if (file) {
+                        upload(file);
+                    }
+                    return false;
+                }
             });
         },300);
     };
 });
+;
+function upload(file) {
 
+    var xhr = new XMLHttpRequest();
+    var log = function(msg){
+        console.log(msg);
+    };
+    // обработчик для закачки
+    xhr.upload.onprogress = function(event) {
+        log(event.loaded + ' / ' + event.total);
+    };
+
+    // обработчики успеха и ошибки
+    // если status == 200, то это успех, иначе ошибка
+    xhr.onload = xhr.onerror = function() {
+        if (this.status == 200) {
+            log("success");
+            $('#add-new-img').dialog("close");
+        } else {
+            alert("error " + this.status);
+            //$('#add-new-img').dialog("close");
+        }
+    };
+
+
+    xhr.open("POST", "upload", true);
+    xhr.send(file);
+
+}
 function dashboardsEvents() {
     $('#add-new-text').dialog({
         buttons: [{text: "OK", click: function() {
@@ -98,10 +136,6 @@ function dashboardsEvents() {
         modal: true
     });
     $('#add-new-img').dialog({
-        buttons: [{text: "OK", click: function() {
-
-            $('#add-new-img').dialog("close");
-        }}],
         width: 400,
         height: 170,
         autoOpen: false,
@@ -122,6 +156,10 @@ function dashboardsEvents() {
             var name = document.querySelector('#dashName').value;
             tabsElem.tabs("refresh");
         });
+        io.on('newDashboard', function (msg) {
+            var tabsElem = $('#tabs');
+            tabsElem.tabs("refresh");
+        });
         document.querySelector('#addDashboard').onclick = function () {
             var dashName = document.querySelector('#dashName').value;
             if (dashName != '') {
@@ -140,13 +178,13 @@ function dashboardsEvents() {
         document.querySelector('#removeDash').onclick = function () {
             var tabsElem = $('#tabs');
             var tabIndex = tabsElem.tabs("option", "active");
+            if(!tabIndex) tabIndex = 0; // for 0-tab
             var elem = tabsElem.find('li:eq(' + tabIndex + ')');
-            io.emit('removeDashboard', elem.id);
-            //удаляем активную вкладку
-            //elem.css('display','none');
+            //remove active tab
+            io.emit('removeDashboard',/* elem.id*/ elem.attr("aria-controls"));
+            elem.css('display','none');
             tabsElem.tabs("refresh");
         };
-
     });
     $(".markItUp").markItUp(mySettings);
 }

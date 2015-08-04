@@ -14,21 +14,25 @@
         <textarea id="new-link-address-widget" placeholder="Add link here" cols="70"></textarea>
     </div>
     <div id="add-new-img" class="add-widget-dialog" title="Add image">
-        <input type="file" name="image" />
+        <form name="upload">
+            <input type="file" accept="image/*,image/jpeg" name="image" /><!-- "image/*,image/jpeg for FF-->
+            <input type="submit" value="Upload">
+        </form>
+
     </div>
     <div id="tabs" class="ui-tabs-abs" ng-controller="dashboardsCtrl" ng-tabs="ngTabs">
         <ul>
             <li ng-repeat="dash in dashboards">
-                <a href="#{{dash.id}}">{{dash.name}}</a>
+                <a href="#{{dash.Id}}">{{dash.Name}}</a>
             </li>
         </ul>
-            <div id="{{dash.id}}" ng-repeat="dash in dashboards">
+            <div id="{{dash.Id}}" ng-repeat="dash in dashboards">
                 <input type="text" id="widgetName" autofocus>
                 <div class="new-widget-buttons">
                     <input type="submit" class="addTextWidget" value="Add text">
                     <input type="submit" class="addLinkWidget" value="Add link">
                     <input type="submit" class="addImgWidget" value="Add image">
-                    <a>{{dash.id}}</a>
+                    <a>{{dash.Id}}</a>
                 </div>
                 <div id='{{widget.id}}' class="draggable" ng-repeat="widget in dash.widgets">
                     <img src="images/delete-widget.png" class="close-widget-button" onclick="closeWidget(this.parentNode.id)"/>
